@@ -1,17 +1,20 @@
 package banner_service.controller;
 
 import org.apache.http.client.fluent.Request;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
 import org.json.JSONObject;
-
-import java.net.URI;
 
 import static org.junit.Assert.*;
 
 /**
  * Created by svindler on 10.01.2017.
  */
+
 public class BannerServiceControllerTest {
+
+    private static String  localhost = "http://localhost:60000";
+
     @org.junit.Before
     public void setUp() throws Exception {
     }
@@ -23,24 +26,28 @@ public class BannerServiceControllerTest {
 
     @org.junit.Test
     public void getBannerWithNullUser() throws Exception {
-        URI uri = new URIBuilder("http://localhost:60000/banner").build();
-        String rawString = Request.Get(uri).execute().returnContent().asString();
+        String rawString = Request.Post(localhost  + "/banner").addHeader("details", "{}")
+                .execute().returnContent().asString();
+
         JSONObject json = new JSONObject(rawString);
         assertEquals("null", json.get("user"));
     }
 
     @org.junit.Test
     public void getBannerWithUser() throws Exception {
-        URI uri = new URIBuilder("http://localhost:60000/banner?user=user").build();
-        String rawString = Request.Get(uri).execute().returnContent().asString();
+
+        String rawString = Request.Post(localhost + "/banner").addHeader("details", "{user:user}")
+                .execute().returnContent().asString();
+
         JSONObject json = new JSONObject(rawString);
         assertEquals("user", json.get("user"));
     }
 
     @org.junit.Test
     public void getBannerWithUserAndCart() throws Exception {
-        URI uri = new URIBuilder("http://localhost:60000/banner?user=user&cart=cart").build();
-        String rawString = Request.Get(uri).execute().returnContent().asString();
+        String rawString = Request.Post(localhost + "/banner").addHeader("details", "{user:user, cart:cart}")
+                .execute().returnContent().asString();
+
         JSONObject json = new JSONObject(rawString);
         assertEquals("cart", json.get("cart"));
     }

@@ -31,7 +31,7 @@ public class BannerService {
         application.controller = new BannerServiceController(Service.getInstance());
 
         // --- MAPPINGS ---
-        get("/banner", application.controller::getBanner);
+        post("/banner", application.controller::getBanner);
 
         // --- EXCEPTION HANDLING ---
         exception(URISyntaxException.class, (exception, request, response) -> {
