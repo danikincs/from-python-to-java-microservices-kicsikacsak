@@ -1,6 +1,7 @@
 package banner_service.controller;
 
 import banner_service.Service.Service;
+import org.json.JSONObject;
 import spark.Request;
 import spark.Response;
 
@@ -15,5 +16,15 @@ public class BannerServiceController {
         this.service = service;
     }
 
-    public void getBanner(Request request, Response response){}
+    public JSONObject getBanner(Request request, Response response) {
+        if(request.queryParams("user") == null) {
+            return service.getBanner();
+//            return "do something with null user";
+        }else if (request.queryParams("cart") == null && request.queryParams("user") != null ) {
+            return service.getBanner(request.queryParams("user"));
+//            return "do something with user, and null cart";
+        }
+        return service.getBanner(request.queryParams("user"), request.queryParams("cart"));
+//        return "OK BITHCES";
+    }
 }

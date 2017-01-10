@@ -2,11 +2,13 @@ package banner_service;
 
 import banner_service.Service.Service;
 import banner_service.controller.BannerServiceController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URISyntaxException;
 
-import static spark.Spark.exception;
-import static spark.Spark.port;
+import static spark.Spark.*;
+
 
 /**
  * Created by svindler on 10.01.2017.
@@ -15,8 +17,11 @@ import static spark.Spark.port;
 public class BannerService {
 
     private BannerServiceController controller;
+    private static final Logger logger = LoggerFactory.getLogger(BannerService.class);
 
-    public static void main(String args[]) {
+
+    public static void main(String[] args) {
+        logger.debug("Starting " + BannerService.class.getName() + "...");
 
         setup(args);
         System.out.println(args[0]);
@@ -26,19 +31,19 @@ public class BannerService {
         application.controller = new BannerServiceController(Service.getInstance());
 
         // --- MAPPINGS ---
-//        get("/status", application.controller::status);
-//        get("/api/random", application.controller::random);
-//        get("/api/categories", application.controller::categories);
+        get("/banner", application.controller::getBanner);
 
         // --- EXCEPTION HANDLING ---
         exception(URISyntaxException.class, (exception, request, response) -> {
             response.status(500);
             response.body(String.format("URI building error, maybe wrong format? : %s", exception.getMessage()));
+            logger.error("Error while processing request", exception);
         });
 
         exception(Exception.class, (exception, request, response) -> {
             response.status(500);
             response.body(String.format("Unexpected error occurred: %s", exception.getMessage()));
+            logger.error("Error while processing request", exception);
         });
     }
 
@@ -48,12 +53,14 @@ public class BannerService {
      */
     private static void setup(String[] args){
         if(args == null || args.length == 0){
+            logger.error("Port must be given as the first argument.");
             System.exit(-1);
         }
 
         try {
             port(Integer.parseInt(args[0]));
         } catch (NumberFormatException e){
+            logger.error("Invalid port given '{}', it should be number.", args[0]);
             System.exit(-1);
         }
     }
