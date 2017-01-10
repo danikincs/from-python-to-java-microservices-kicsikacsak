@@ -1,11 +1,11 @@
 package banner_service;
 
+import banner_service.Service.Service;
 import banner_service.controller.BannerServiceController;
 
 import java.net.URISyntaxException;
 
 import static spark.Spark.exception;
-import static spark.Spark.get;
 import static spark.Spark.port;
 
 /**
@@ -23,7 +23,7 @@ public class BannerService {
 
         BannerService application = new BannerService();
 
-        application.controller = new BannerServiceController();
+        application.controller = new BannerServiceController(Service.getInstance());
 
         // --- MAPPINGS ---
 //        get("/status", application.controller::status);
