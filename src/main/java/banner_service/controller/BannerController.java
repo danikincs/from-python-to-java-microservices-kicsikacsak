@@ -38,12 +38,18 @@ public class BannerController {
 
             if(jsonObject.length() == 0) {
                 return service.getBanner();
-
-            }else if (!jsonObject.has("cart")) {
-                return service.getBanner(jsonObject.get("user").toString());
-
             }
-            return service.getBanner(jsonObject.get("user").toString(), jsonObject.get("cart").toString());
+            if (checkClientAPIKEY(request.body())) {
+                System.out.println(checkClientAPIKEY(request.body()));
+                if (!jsonObject.has("cart")) {
+                    return service.getBanner(jsonObject.get("user").toString());
+                }
+                return service.getBanner(jsonObject.get("user").toString(), jsonObject.get("cart").toString());
+            }
+            else {
+                response.status(400);
+                jsonObject = new JSONObject("{error:API key required please contact the developers}");
+            }
 
         }else if(request.body().isEmpty()) {
             System.out.println("itt vagyok éppen mostan");
@@ -56,7 +62,7 @@ public class BannerController {
 
     public boolean checkClientAPIKEY(String jsonStr) throws JSONException {
         JSONObject jsonObject = new JSONObject(jsonStr);
-        String apikey = jsonObject.getString("apikey");
+        Integer apikey = jsonObject.getInt("apikey");
 
         String query = "SELECT * FROM client WHERE apikey = ? ;";
 
@@ -64,7 +70,7 @@ public class BannerController {
              PreparedStatement statement = connection.prepareStatement(query))
 
         {
-            statement.setString(1, apikey);
+            statement.setString(1, apikey.toString());
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
