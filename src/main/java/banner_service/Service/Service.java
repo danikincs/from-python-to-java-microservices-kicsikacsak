@@ -8,6 +8,12 @@ import org.json.JSONObject;
 public class Service {
 
     private static Service instance;
+    private static String HTML = "<div class=\"container\">" +
+            "<div class=\"col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3\">" +
+            "<a href=\"https://codecool.hu/\"><img src=\"http://www.auplod.com/u/opladu8f6e7.gif\" border=\"1\">" +
+            "</a></div></div>";
+
+
 
     private Service() {
 
@@ -24,7 +30,7 @@ public class Service {
         JSONObject obj = new JSONObject();
         obj.put("user","null");
         obj.put("cart", "null");
-        obj.put("Advertisement", "sent");
+        obj.put("Advertisement", HTML);
         return obj;
     }
 
