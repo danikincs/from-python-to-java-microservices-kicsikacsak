@@ -13,10 +13,7 @@ public class Service {
             "<a href=\"https://codecool.hu/\"><img src=\"http://www.auplod.com/u/opladu8f6e7.gif\" border=\"1\">" +
             "</a></div></div>";
 
-
-
     private Service() {
-
     }
 
     public static Service getInstance(){
