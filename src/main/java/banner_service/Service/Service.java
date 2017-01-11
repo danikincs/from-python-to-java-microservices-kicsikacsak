@@ -35,17 +35,14 @@ public class Service {
 
     public JSONObject getBanner(String user) {
         JSONObject obj = new JSONObject();
-        obj.put("user", user);
-        obj.put("cart", "null");
-        obj.put("sugg", "sent");
+
+        obj.put("status", "done");
         return obj;
     }
 
     public JSONObject getBanner(String user, String cart) {
         JSONObject obj = new JSONObject();
-        obj.put("user", user);
-        obj.put("cart", cart);
-        obj.put("suggestion", "sent");
+        obj.put("status", "done");
         return obj;
     }
 }
