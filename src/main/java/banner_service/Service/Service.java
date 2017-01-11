@@ -44,6 +44,7 @@ public class Service {
 
     public JSONObject getBanner(String user, String cart) {
         JSONObject obj = new JSONObject();
+        obj.put("Advertisement", customer_HTML);
         obj.put("status", "done");
         return obj;
     }

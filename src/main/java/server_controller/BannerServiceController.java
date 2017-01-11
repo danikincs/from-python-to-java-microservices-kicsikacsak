@@ -22,4 +22,11 @@ public class BannerServiceController {
                 .execute().returnContent().asString();
     }
 
+    public String getBannerByUsername() throws URISyntaxException, IOException {
+        StringEntity jsonstring = new StringEntity("{user:user, apikey:1234}");
+
+        return Request.Post(SERVICE_URL + "/banner").body(jsonstring)
+                .execute().returnContent().asString();
+    }
+
 }
