@@ -1,12 +1,12 @@
 package banner_service.controller;
 
 import org.apache.http.HttpEntity;
-import org.apache.http.client.HttpResponseException;
+import org.apache.http.HttpResponse;
 import org.apache.http.client.fluent.Request;
+
 import org.apache.http.entity.StringEntity;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
-import org.junit.Assert;
-import spark.Response;
 
 import static org.junit.Assert.*;
 
@@ -17,16 +17,7 @@ import static org.junit.Assert.*;
 public class BannerServiceControllerTest {
 
     private static String localhost = "http://localhost:60000";
-
-    @org.junit.Before
-    public void setUp() throws Exception {
-    }
-
-    @org.junit.After
-    public void tearDown() throws Exception {
-
-    }
-
+    
     @org.junit.Test
     public void getBannerWithEmptyJson() throws Exception {
         StringEntity jsonstring = new StringEntity("{}");
@@ -61,10 +52,25 @@ public class BannerServiceControllerTest {
     }
 
 
-    @org.junit.Test (expected = HttpResponseException.class)
+    @org.junit.Test
     public void getBannerWithNull() throws Exception {
-        Request.Post(localhost + "/banner")
-                .execute().returnContent().asString();
+        HttpResponse response = Request.Post(localhost + "/banner")
+                .execute().returnResponse();
+        System.out.println(Request.Post(localhost + "/banner").execute());
+
+        HttpEntity entity = response.getEntity();
+        String responseString = EntityUtils.toString(entity, "UTF-8");
+        JSONObject jsonObject = new JSONObject(responseString);
+        assertEquals("Empty request body", jsonObject.get("error"));
+
+    }
+
+    @org.junit.Test
+    public void testErrorCodeWhenRequestBodyIsNull() throws Exception {
+        HttpResponse response = Request.Post(localhost + "/banner")
+                .execute().returnResponse();
+        assertEquals(400, response.getStatusLine().getStatusCode());
+
     }
 
 }
