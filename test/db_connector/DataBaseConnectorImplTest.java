@@ -17,7 +17,13 @@ public class DataBaseConnectorImplTest{
 
     @Test
     public void checkIfDataExists() throws Exception {
-        boolean test = controller.checkClientAPIKEY("{client_id:1, name: Testclient, apikey:QR43}");
+        boolean test = controller.checkClientAPIKEY("{client_id:1, name: Testclient, apikey:1234}");
+        assertEquals(true, test);
+    }
+
+    @Test
+    public void checkforInvalidApiKey() throws Exception {
+        boolean test = controller.checkClientAPIKEY("{client_id:1, name: Testclient, apikey:1234333}");
         assertEquals(true, test);
 
     }

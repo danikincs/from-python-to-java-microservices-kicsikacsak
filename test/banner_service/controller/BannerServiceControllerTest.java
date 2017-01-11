@@ -26,29 +26,29 @@ public class BannerServiceControllerTest {
                 .execute().returnContent().asString();
 
         JSONObject json = new JSONObject(rawString);
-        assertEquals("null", json.get("user"));
+        assertEquals("done", json.get("status"));
     }
 
     @org.junit.Test
     public void getBannerWithUser() throws Exception {
-        StringEntity jsonstring = new StringEntity("{user:user}");
+        StringEntity jsonstring = new StringEntity("{user:user, apikey:1234}");
 
         String rawString = Request.Post(localhost + "/banner").body(jsonstring)
                 .execute().returnContent().asString();
 
         JSONObject json = new JSONObject(rawString);
-        assertEquals("user", json.get("user"));
+        assertEquals("done", json.get("status"));
     }
 
     @org.junit.Test
     public void getBannerWithUserAndCart() throws Exception {
-        StringEntity jsonstring = new StringEntity("{user:user, cart:cart}");
+        StringEntity jsonstring = new StringEntity("{user:user, cart:cart, apikey:1234}");
 
         String rawString = Request.Post(localhost + "/banner").body(jsonstring)
                 .execute().returnContent().asString();
 
         JSONObject json = new JSONObject(rawString);
-        assertEquals("cart", json.get("cart"));
+        assertEquals("done", json.get("status"));
     }
 
 

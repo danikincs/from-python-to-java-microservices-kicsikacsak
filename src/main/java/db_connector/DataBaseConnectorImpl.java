@@ -52,7 +52,7 @@ public class DataBaseConnectorImpl implements DataBaseConnector {
                     DB_USER,
                     DB_PASSWORD);
         } catch (Exception e) {
-            System.out.println("Invalid connection properties");
+            System.out.println("Invalid connection properties " + e);
         }
         return connection;
     }
