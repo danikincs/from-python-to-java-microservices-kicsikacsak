@@ -9,11 +9,11 @@ import spark.Response;
  * Created by svindler on 10.01.2017.
  */
 
-public class BannerServiceController {
+public class BannerController {
 
     private final Service service;
 
-    public BannerServiceController(Service service){
+    public BannerController(Service service){
         this.service = service;
     }
 
