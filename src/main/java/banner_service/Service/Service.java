@@ -28,8 +28,7 @@ public class Service {
 
     public JSONObject getBanner(){
         JSONObject obj = new JSONObject();
-        obj.put("user","null");
-        obj.put("cart", "null");
+        obj.put("status","done");
         obj.put("Advertisement", HTML);
         return obj;
     }

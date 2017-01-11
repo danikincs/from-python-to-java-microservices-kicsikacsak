@@ -24,7 +24,7 @@ public class ServiceTest {
 
     @Test
     public void getBannerWithEmptyBody() throws Exception {
-        assertEquals("null", service.getBanner().get("user"));
+        assertEquals("done", service.getBanner().get("status"));
     }
 
     @Test

@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 public class BannerServiceControllerTest {
 
     private static String localhost = "http://localhost:60000";
-    
+
     @org.junit.Test
     public void getBannerWithEmptyJson() throws Exception {
         StringEntity jsonstring = new StringEntity("{}");
