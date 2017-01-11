@@ -1,7 +1,7 @@
 package banner_service;
 
 import banner_service.Service.Service;
-import banner_service.controller.BannerServiceController;
+import banner_service.controller.BannerController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,7 +16,7 @@ import static spark.Spark.*;
 
 public class BannerService {
 
-    private BannerServiceController controller;
+    private BannerController controller;
     private static final Logger logger = LoggerFactory.getLogger(BannerService.class);
 
 
@@ -28,7 +28,7 @@ public class BannerService {
 
         BannerService application = new BannerService();
 
-        application.controller = new BannerServiceController(Service.getInstance());
+        application.controller = new BannerController(Service.getInstance());
 
         // --- MAPPINGS ---
         post("/banner", application.controller::getBanner);
