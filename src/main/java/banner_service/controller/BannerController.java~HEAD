@@ -15,25 +15,43 @@ import java.sql.SQLException;
 /**
  * Created by svindler on 10.01.2017.
  */
-public class BannerServiceController {
+
+public class BannerController {
 
     private final Service service;
     private static DataBaseConnectorImpl connector = DataBaseConnectorImpl.getInstance();
 
-    public BannerServiceController(Service service) {
+
+    public BannerController(Service service){
         this.service = service;
     }
 
-    public JSONObject getBanner(Request request, Response response) {
-        if (request.queryParams("user") == null) {
-            return service.getBanner();
-//            return "do something with null user";
-        } else if (request.queryParams("cart") == null && request.queryParams("user") != null) {
-            return service.getBanner(request.queryParams("user"));
-//            return "do something with user, and null cart";
+    public JSONObject getBanner(Request request, Response response){
+
+        System.out.println(request.body());
+
+        JSONObject jsonObject = null;
+
+        if(request.body() != null && !request.body().isEmpty()) {
+
+            jsonObject = new JSONObject(request.body());
+
+            if(jsonObject.length() == 0) {
+                return service.getBanner();
+
+            }else if (!jsonObject.has("cart")) {
+                return service.getBanner(jsonObject.get("user").toString());
+
+            }
+            return service.getBanner(jsonObject.get("user").toString(), jsonObject.get("cart").toString());
+
+        }else if(request.body().isEmpty()) {
+            System.out.println("itt vagyok éppen mostan");
+            response.status(400);
+            jsonObject = new JSONObject("{error:Empty request body}");
         }
-        return service.getBanner(request.queryParams("user"), request.queryParams("cart"));
-//        return "OK BITHCES";
+        return jsonObject;
+
     }
 
     public boolean checkClientAPIKEY(String jsonStr) throws JSONException {
