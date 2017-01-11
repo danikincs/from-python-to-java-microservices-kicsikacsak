@@ -1,0 +1,7 @@
+{"tag":"div","class":"container","children":[
+  {"tag":"div","class":"col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3","children":[
+    {"tag":"a","href":"https://codecool.hu/","children":[
+      {"tag":"img","src":"cc_banner0.gif","border":"1","html":""}
+    ]}
+  ]}
+]}

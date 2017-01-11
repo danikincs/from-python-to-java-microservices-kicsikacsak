@@ -1,6 +1,7 @@
 package server_controller;
 
 import banner_service.controller.BannerController;
+import org.json.JSONObject;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -20,11 +21,13 @@ public class ServerController {
 
         BannerServiceController bannerServiceController = new BannerServiceController();
         try {
-            params.put("banner", bannerServiceController.getBanner());
+            JSONObject jsonObject = new JSONObject(bannerServiceController.getBanner());
+
+            params.put("banner", jsonObject.get("Advertisement"));
         }catch (IOException | URISyntaxException e) {
             System.out.print(e);
         }
 
-        return new ModelAndView(params, "html/index");
+        return new ModelAndView(params, "index");
     }
 }
