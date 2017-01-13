@@ -52,7 +52,8 @@ To get the advertisement you have to send a post request to the api, with a Json
      - "{error:Empty request body}"
      - "{error:API key required please contact the developers}")
   
-  
+ ![alt tag](http://www.dumpaday.com/wp-content/uploads/2016/04/funny-25.png)
+
 **License**
 
 License granted by kicsiKacsák authorizes the customer to integrate and use the service with a unique, non-transferable identifier key. No changes or modifications are allowed.
