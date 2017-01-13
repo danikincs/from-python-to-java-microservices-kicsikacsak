@@ -15,6 +15,7 @@ import java.util.Map;
  * Created by svindler on 11.01.2017.
  */
 public class ServerController {
+
     public static ModelAndView renderProducts(Request req, Response res) {
 
         Map<Object, Object> params = new HashMap<>();

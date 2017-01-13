@@ -52,7 +52,6 @@ public class BannerController {
             }
 
         }else if(request.body().isEmpty()) {
-            System.out.println("itt vagyok éppen mostan");
             response.status(400);
             jsonObject = new JSONObject("{error:Empty request body}");
         }
