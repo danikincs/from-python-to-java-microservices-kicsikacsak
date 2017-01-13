@@ -21,8 +21,8 @@ It's pretty simple to integrate our banner service into your webshop:
   -change the connectionSAMPLE.properties file name to connection.properties
   -fill the data inside like:
       - database=jdbc:postgresql://localhost/YOURDATABASE
-        user=YOURDBUSERNAME
-        password=YOURPASSWORD
+      - user=YOURDBUSERNAME
+      - password=YOURPASSWORD
   - fill the database with the init.sql file 
   - if you want to send requests with username, you have to put an APIKEY to the clients table. 
 
