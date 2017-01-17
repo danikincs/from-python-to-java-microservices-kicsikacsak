@@ -5,6 +5,14 @@ import org.json.JSONObject;
 /**
  * Created by svindler on 10.01.2017.
  */
+
+/**
+ * This class contains the main api logic
+ *
+ * @author danikincs
+ * @version 1.0
+ */
+
 public class Service {
 
     private static Service instance;
@@ -28,6 +36,10 @@ public class Service {
         return instance;
     }
 
+    /**
+     * Simpliest advertisement method
+     * @return a Jsonobject with status and Advertisement keys.
+     */
     public JSONObject getBanner(){
         JSONObject obj = new JSONObject();
         obj.put("status","done");
@@ -35,6 +47,12 @@ public class Service {
         return obj;
     }
 
+    /**
+     * Advertisement getter method with a parameter
+     * NOT IMPLEMENTED YET
+     * @param user which is a string from the request
+     * @return a Jsonobject with status and Advertisement keys.
+     */
     public JSONObject getBanner(String user) {
         JSONObject obj = new JSONObject();
         obj.put("Advertisement", customer_HTML);
@@ -42,6 +60,13 @@ public class Service {
         return obj;
     }
 
+    /**
+     * Advertisementgetter method with two parameters
+     * NOT IMPLEMENTED YET
+     * @param user which is a string from the request
+     * @param cart which is a string from the request
+     * @return a Jsonobject with status and Advertisement keys.
+     */
     public JSONObject getBanner(String user, String cart) {
         JSONObject obj = new JSONObject();
         obj.put("Advertisement", customer_HTML);

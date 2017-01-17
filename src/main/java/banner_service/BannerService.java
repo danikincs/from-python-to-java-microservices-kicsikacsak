@@ -13,6 +13,16 @@ import static spark.Spark.*;
 /**
  * Created by svindler on 10.01.2017.
  */
+/**
+ * <h1>Banner Microservice</h1>
+ * <h2>By Kicsikacsák</h2>
+ * Responsible for running the server of the MicroService
+ *
+ * @author danikincs
+ * @version 1.0
+ * @see BannerService
+ * @see BannerController
+ */
 
 public class BannerService {
 
@@ -20,6 +30,11 @@ public class BannerService {
     private static final Logger logger = LoggerFactory.getLogger(BannerService.class);
 
 
+    /**
+     * Main method, for setting port, endpoints, and overall Exception handling
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         logger.debug("Starting " + BannerService.class.getName() + "...");
 
